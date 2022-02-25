@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import os
 from os import walk 
 from PIL import Image #Opens images and retrieves exif
@@ -13,17 +7,6 @@ from os.path import join
 
 import datetime
 from fractions import Fraction
-
-
-# In[40]:
-
-
-#image_filepath = "/Users/harpe/OneDrive/Documents/HARPER STUFF/CCBER-capstone/All"
-#csvfile = 'exifdatatest.csv'
-
-
-# In[66]:
-
 
 def create_lookups():
     lookups = {}
@@ -77,9 +60,6 @@ def create_lookups():
     return lookups
 
 
-# In[68]:
-
-
 def process_exif_dict(exif_dict): # defines function to make exif info human-readable
     date_format = "%Y:%m:%d %H:%M:%S"
 
@@ -125,17 +105,10 @@ def process_exif_dict(exif_dict): # defines function to make exif info human-rea
     
     return exif_dict
 
-
-# In[42]:
-
-
 exifdataobjs = ["ExifVersion","FNumber","MaxApertureValue","DateTimeOriginal", "DateTimeDigitized","DateTime","BrightnessValue","MeteringMode","Flash",
     "FocalLength","FocalLengthIn35mmFilm","ColorSpace","SceneCaptureType","ExifImageWidth","ExifImageHeight","Make","Model","Orientation","YCbCrPositioning", 
      "ShutterSpeedValue","ExposureTime","ExposureMode","ExposureBiasValue","XResolution","YResolution","ResolutionUnit","ISOSpeedRatings","ExifOffset",
     "WhiteBalance" ,"Software"]
-
-
-# In[62]:
 
 
 def get_exif(fn): #Defining a function that opens an image, retrieves the exif data, corrects the exif tags from digits to names and puts the data into a dictionary
@@ -149,9 +122,6 @@ def get_exif(fn): #Defining a function that opens an image, retrieves the exif d
         res = dict(zip(exifdataobjs, [None]*len(exifdataobjs)))
         print("Sorry", fn, "has no exif data.")
         return res
-
-
-# In[69]:
 
 
 if __name__ == "__main__":
@@ -194,37 +164,3 @@ if __name__ == "__main__":
             for row in zipped:
                 writer.writerow(row)
         print(csvfile,"successfully created.")
-
-
-# In[70]:
-
-
-# iterate through diff exif variables and to prepare data for csv
-# num_lists = int(len(exifdataobjs))
-# lists = [[] for i in range(num_lists+1)]
-# lists[0].extend(Filenames)
-
-# i = 1
-# for obj in exifdataobjs:
-#     for j in ExifData:
-#         if obj in j: # trying to get rid of na error
-#             lists[i].append(j[obj])
-#         else:
-#             lists[i].append('na')
-#     i+=1
-#     if i == (len(exifdataobjs)+1):
-#         break
-# exifdataobjs.insert(0, "File")
-
-
-# In[71]:
-
-
-# zipped = zip(*lists) #Combines the lists to be written into a csv.
-
-# with open(csvfile, "w", newline='') as f: #Writes a csv-file with the exif data
-#     writer = csv.writer(f)
-#     writer.writerow(exifdataobjs) # add exifdataobjs
-#     for row in zipped:
-#         writer.writerow(row)
-
